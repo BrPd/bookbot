@@ -1,3 +1,4 @@
+import sys         # The built in sys module provides access to command line arguments.
 from stats import count_words
 from stats import count_chars
 from stats import sorted_list_of_dict
@@ -11,7 +12,7 @@ def get_book_txt(filepath):
 
 def main():
     print("============ BOOKBOT ============")
-    print("Analyzing book found at books/frankenstein.txt...")
+    print(f"Analyzing book found at {filepath}...")
     print("----------- Word Count ----------")
     
     text = get_book_txt(filepath)
@@ -28,8 +29,13 @@ def main():
     print("============= END ===============")
 
 
+# To check if user input has less than two entries
+if len(sys.argv) < 2:   # sys.argv is a list of strings representing the arguments passed to the script.
+    print("invalid Input")  # The first argument is the script name, the rest are the arguments
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)     # Exits the program with a status code of 1
 
-
-filepath = "./books/frankenstein.txt"
-main()
+for i in range(1, len(sys.argv)):  # calls main() for each filepath in the user input 
+    filepath = sys.argv[i]
+    main()
 
